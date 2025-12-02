@@ -1,0 +1,4 @@
+port: "8000"
+
+client:
+  apiKey: "a742001c7caaab10bb2d5bc9be7b191e"

@@ -36,10 +36,29 @@ Clean Architecture:
 
 ## Project Structure
 ```bash
+.
 ├── backend
 │   ├── cmd
-│   ├── internals
-│   └── pckg
+│   │   └── main.go
+│   ├── configs
+│   │   └── config.yml
+│   ├── go.mod
+│   ├── go.sum
+│   └── internal
+│       ├── client
+│       │   └── weather.go
+│       ├── handler
+│       │   ├── forecast.go
+│       │   └── handler.go
+│       ├── models
+│       │   ├── forecast.go
+│       │   ├── request.go
+│       │   └── response.go
+│       ├── server
+│       │   └── server.go
+│       └── services
+│           ├── forecast.go
+│           └── services.go
 ├── frontend
 └── README.md
 ```
