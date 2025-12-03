@@ -10,7 +10,9 @@ type Services struct {
 }
 
 type Forecast interface {
-	GetForecast(place string) ([]models.Forecast, error)
+	GetForecastEvery3Hours(place string) ([]models.Forecast, error)
+	GetCurrentWeather(place string) (models.CurrentWeatherForecast, error)
+	GetForecastPerDay(place string) ([]models.Forecast, error)
 }
 
 func NewServices(api *client.WeatherClient) *Services {

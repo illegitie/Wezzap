@@ -6,9 +6,8 @@ import (
 )
 
 type WeatherAPIResponse struct {
-	Success bool       `json:"success"`
-	Data    []Forecast `json:"data,omitempty"`
-	Error   string     `json:"error"`
+	Success bool        `json:"success"`
+	Data    interface{} `json:"data,omitempty"`
 }
 
 type errorResponse struct {
@@ -31,5 +30,28 @@ type OpenWeatherApiResponse struct {
 			TempMin float64 `json:"temp_min"`
 			TempMax float64 `json:"temp_max"`
 		} `json:"main"`
+		Weather []WeatherCondition `json:"weather"`
 	} `json:"list"`
+}
+
+type CurrentWeatherResponse struct {
+	Name       string `json:"name"`
+	Dt         int64  `json:"dt"`
+	Visibility int    `json:"visibility"`
+	Main       struct {
+		Temp      float64 `json:"temp"`
+		FeelsLike float64 `json:"feels_like"`
+		TempMin   float64 `json:"temp_min"`
+		TempMax   float64 `json:"temp_max"`
+		Pressure  float64 `json:"pressure"`
+		Humidity  int     `json:"humidity"`
+	} `json:"main"`
+	Wind struct {
+		Speed float64 `json:"speed"`
+		Deg   int     `json:"deg"`
+	} `json:"wind"`
+	Clouds struct {
+		All int `json:"all"`
+	} `json:"clouds"`
+	Weather []WeatherCondition `json:"weather"`
 }

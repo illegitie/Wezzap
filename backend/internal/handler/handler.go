@@ -21,7 +21,9 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	forecast := router.Group("/forecast")
 	{
-		forecast.GET("/", h.GetForecast)
+		forecast.GET("/", h.GetForecastEvery3Hours)
+		forecast.GET("/current", h.GetCurrentWeather)
+		forecast.GET("/per-day", h.GetForecastPerDay)
 	}
 
 	return router

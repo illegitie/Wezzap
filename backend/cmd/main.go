@@ -19,10 +19,12 @@ func main() {
 	}
 	apiKey := viper.GetString("client.apiKey")
 	port := viper.GetString("port")
+
 	srv := new(backend.Server)
 	api := client.NewWeatherClient(apiKey)
 	services := service.NewServices(api)
 	handlers := handler.NewHandler(services)
+
 	if err := srv.Run(port, handlers.InitRoutes()); err != nil {
 		log.Fatal(err)
 	}

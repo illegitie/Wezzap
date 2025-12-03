@@ -3,8 +3,7 @@
 Technologies:
 * Backend
   * Go
-  * Gin 
-  * PostgreSQL
+  * Gin
   * REST API
 * Frontend
   * JavaScript 
