@@ -1,6 +1,7 @@
 package server
 
 import (
+	"context"
 	"net/http"
 )
 
@@ -16,4 +17,8 @@ func (s *Server) Run(port string, handler http.Handler) error {
 	}
 	//log.Printf("Server running on port %s...", s.Server.Addr)
 	return s.Server.ListenAndServe()
+}
+
+func (s *Server) Shutdown(ctx context.Context) error {
+	return s.Server.Shutdown(ctx)
 }
