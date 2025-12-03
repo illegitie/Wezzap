@@ -10,7 +10,7 @@ type Services struct {
 }
 
 type Forecast interface {
-	GetForecastEvery3Hours(place string) ([]models.Forecast, error)
+	GetForecastEvery3Hours(place string) ([]models.ForecastEvery3Hours, error)
 	GetCurrentWeather(place string) (models.CurrentWeatherForecast, error)
 	GetForecastPerDay(place string) ([]models.Forecast, error)
 }

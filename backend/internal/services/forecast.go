@@ -19,7 +19,7 @@ func (s *ForecastService) GetCurrentWeather(place string) (models.CurrentWeather
 	return s.api.GetCurrentWeather(place)
 }
 
-func (s *ForecastService) GetForecastEvery3Hours(city string) ([]models.Forecast, error) {
+func (s *ForecastService) GetForecastEvery3Hours(city string) ([]models.ForecastEvery3Hours, error) {
 	return s.api.GetForecastEvery3Hours(city)
 }
 

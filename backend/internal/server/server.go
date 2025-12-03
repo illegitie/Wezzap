@@ -15,7 +15,6 @@ func (s *Server) Run(port string, handler http.Handler) error {
 		Handler:        handler,
 		MaxHeaderBytes: 1 << 20,
 	}
-	//log.Printf("Server running on port %s...", s.Server.Addr)
 	return s.Server.ListenAndServe()
 }
 

@@ -27,6 +27,7 @@ type OpenWeatherApiResponse struct {
 	List []struct {
 		DtTxt string `json:"dt_txt"`
 		Main  struct {
+			Temp    float64 `json:"temp"`
 			TempMin float64 `json:"temp_min"`
 			TempMax float64 `json:"temp_max"`
 		} `json:"main"`

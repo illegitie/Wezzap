@@ -51,7 +51,6 @@ Clean Architecture:
 │       │   └── handler.go
 │       ├── models
 │       │   ├── forecast.go
-│       │   ├── request.go
 │       │   └── response.go
 │       ├── server
 │       │   └── server.go

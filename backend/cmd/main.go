@@ -26,14 +26,17 @@ func main() {
 		log.Fatalf("Error reading config file, %s", err)
 	}
 	apiKey := viper.GetString("client.apiKey")
+	port := viper.GetString("port")
 
-	srv := new(backend.Server)
+
 	api := client.NewWeatherClient(apiKey)
 	services := service.NewServices(api)
 	handlers := handler.NewHandler(services)
 
+	srv := new(backend.Server)
+
 	go func() {
-		if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil && !errors.Is(err, http.ErrServerClosed) {
+		if err := srv.Run(port, handlers.InitRoutes()); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			logrus.Fatalf("errorResponse occured while running http server: %s", err.Error())
 		}
 	}()

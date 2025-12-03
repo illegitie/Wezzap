@@ -16,6 +16,13 @@ type WeatherClient struct {
 	Client *http.Client
 }
 
+func NewWeatherClient(apiKey string) *WeatherClient {
+	return &WeatherClient{
+		apiKey: apiKey,
+		Client: http.DefaultClient,
+	}
+}
+
 func (c *WeatherClient) GetCurrentWeather(place string) (models.CurrentWeatherForecast, error) {
 	url := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric", place, c.apiKey)
 	resp, err := c.Client.Get(url)
@@ -49,14 +56,7 @@ func (c *WeatherClient) GetCurrentWeather(place string) (models.CurrentWeatherFo
 	return result, nil
 }
 
-func NewWeatherClient(apiKey string) *WeatherClient {
-	return &WeatherClient{
-		apiKey: apiKey,
-		Client: http.DefaultClient,
-	}
-}
-
-func (c *WeatherClient) GetForecastEvery3Hours(city string) ([]models.Forecast, error) {
+func (c *WeatherClient) GetForecastEvery3Hours(city string) ([]models.ForecastEvery3Hours, error) {
 	url := fmt.Sprintf("https://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric", city, c.apiKey)
 
 	resp, err := c.Client.Get(url)
@@ -74,12 +74,11 @@ func (c *WeatherClient) GetForecastEvery3Hours(city string) ([]models.Forecast, 
 		return nil, err
 	}
 
-	result := make([]models.Forecast, 0, len(raw.List))
+	result := make([]models.ForecastEvery3Hours, 0, len(raw.List))
 	for _, item := range raw.List {
-		result = append(result, models.Forecast{
-			Day:     item.DtTxt,
-			Max:     item.Main.TempMax,
-			Min:     item.Main.TempMin,
+		result = append(result, models.ForecastEvery3Hours{
+			Time:    item.DtTxt,
+			Temp:    item.Main.Temp,
 			Weather: item.Weather,
 		})
 	}
@@ -93,7 +92,9 @@ func (c *WeatherClient) GetForecastPerDay(place string) ([]models.Forecast, erro
 	if err != nil {
 		return nil, err
 	}
+
 	defer resp.Body.Close()
+
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("status code %d", resp.StatusCode)
 	}
@@ -128,6 +129,7 @@ func (c *WeatherClient) GetForecastPerDay(place string) ([]models.Forecast, erro
 			}
 		}
 	}
+
 	dailyForecast := make([]models.Forecast, 0, len(dailyMap))
 	for _, item := range dailyMap {
 		dailyForecast = append(dailyForecast, item)
@@ -135,5 +137,6 @@ func (c *WeatherClient) GetForecastPerDay(place string) ([]models.Forecast, erro
 	sort.Slice(dailyForecast, func(i, j int) bool {
 		return dailyForecast[i].Day < dailyForecast[j].Day
 	})
+
 	return dailyForecast, nil
 }
