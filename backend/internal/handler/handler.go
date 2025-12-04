@@ -3,6 +3,7 @@ package handler
 import (
 	"wezap/internal/services"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,7 +19,7 @@ func NewHandler(s *service.Services) *Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
-
+	router.Use(cors.Default())
 	forecast := router.Group("/forecast")
 	{
 		forecast.GET("/", h.GetForecastEvery3Hours)
