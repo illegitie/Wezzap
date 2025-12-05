@@ -58,6 +58,23 @@ Clean Architecture:
 │           ├── forecast.go
 │           └── services.go
 ├── frontend
+│   ├── package.json
+│   └── public
+│       ├── assets
+│       │   ├── icons
+│       │   ├── images
+│       │   └── styles
+│       │       ├── global.css
+│       │       └── reset.css
+│       ├── index.html
+│       └── src
+│           ├── api
+│           │   └── weather.js
+│           ├── components
+│           │   └── WeatherCard.js
+│           ├── main.js
+│           ├── pages
+│           └── utils
 └── README.md
 ```
 

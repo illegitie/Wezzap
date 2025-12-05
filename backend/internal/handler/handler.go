@@ -22,7 +22,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	router.Use(cors.Default())
 	forecast := router.Group("/forecast")
 	{
-		forecast.GET("/", h.GetForecastEvery3Hours)
+		forecast.GET("", h.GetForecastEvery3Hours)
 		forecast.GET("/current", h.GetCurrentWeather)
 		forecast.GET("/per-day", h.GetForecastPerDay)
 	}

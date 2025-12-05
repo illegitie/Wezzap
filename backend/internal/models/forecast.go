@@ -8,7 +8,7 @@ type Forecast struct {
 }
 
 type ForecastEvery3Hours struct {
-	Time    string             `json:"day"`
+	Time    string             `json:"time"`
 	Temp    float64            `json:"temp"`
 	Weather []WeatherCondition `json:"weather"`
 }

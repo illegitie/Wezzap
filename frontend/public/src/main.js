@@ -1,5 +1,5 @@
-import { getCurrentWeather } from "./api/weather.js";
-import { createWeatherCard } from "./components/WeatherCard.js";
+import {getCurrentWeather, getForecastEvery3Hours, getForecastPerDay} from "./api/weather.js";
+import {createForecastGrid, createHourlyCard, createWeatherCard} from "./components/WeatherCard.js";
 
 const input = document.getElementById("city-input");
 const button = document.getElementById("search-btn");
@@ -13,17 +13,49 @@ button.addEventListener("click", async () => {
     result.classList.remove("hidden");
 
     try {
-        const data = await getCurrentWeather(city);
-        if (!data.success) {
+        // Get current weather
+        const current = await getCurrentWeather(city);
+        if (!current.success) {
             result.innerHTML = `<p>City not found</p>`;
             return;
         }
 
-        // Чисто одно обновление DOM
-        const card = createWeatherCard(data.data);
+        const card = createWeatherCard(current.data);
+
+        // Get per-day forecast
+        const perDay = await getForecastPerDay(city);
+
+        // Create wrapper
+        const forecastWrapper = document.createElement("div");
+        forecastWrapper.className = "forecast-wrapper";
+
+        perDay.data.forEach(day => {
+            const grid = createForecastGrid(day);
+            forecastWrapper.appendChild(grid);
+        });
+
+        const perHour = await getForecastEvery3Hours(city);
+
+        const today=new Date().toISOString().split("T")[0];
+        const todayHours=perHour.data.filter(h=>h.time.startsWith(today));
+
+        const perHourWrapper = document.createElement("div");
+        perHourWrapper.className = "hourly-scroll";
+
+        todayHours.forEach(hour => {
+            const grid = createHourlyCard(hour);
+            perHourWrapper.appendChild(grid);
+        });
+
+
+        // Render everything
         result.innerHTML = "";
         result.appendChild(card);
-    } catch {
+        result.appendChild(perHourWrapper);
+        result.appendChild(forecastWrapper);
+
+    } catch (err) {
+        console.error(err);
         result.innerHTML = `<p>Error occurred</p>`;
     }
 });
