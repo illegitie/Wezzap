@@ -14,11 +14,13 @@ import (
 	backend "wezap/internal/server"
 	"wezap/internal/services"
 
+	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
 func main() {
+	gin.SetMode(gin.ReleaseMode)
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath("configs")
@@ -27,7 +29,6 @@ func main() {
 	}
 	apiKey := viper.GetString("client.apiKey")
 	port := viper.GetString("port")
-
 
 	api := client.NewWeatherClient(apiKey)
 	services := service.NewServices(api)
