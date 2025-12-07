@@ -1,4 +1,4 @@
-# Weather App – Go Backend + JavaScript Frontend
+# WEZZAP
 
 Wezzap is a modern web application for displaying real-time weather. The project uses Go (Gin) on the backend and pure JavaScript on the frontend, with Docker for convenient deployment.
 The application receives weather data via the OpenWeather API and displays it in a user-friendly interface.
