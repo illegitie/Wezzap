@@ -39,7 +39,7 @@ The application receives weather data via the OpenWeather API and displays it in
 ## 🚀 Installation and launch
 ### 1. Clone the repository
 ```bash
-git clone <(https://github.com/illegitie/Wezzap)>
+git clone https://github.com/illegitie/Wezzap
 cd Wezzap
 ```
 ### 2. Launching via Docker Compose
