@@ -4,7 +4,7 @@ Wezzap is a modern web application for displaying real-time weather. The project
 The application receives weather data via the OpenWeather API and displays it in a user-friendly interface.
 
 
-## Project Structure
+##  Project Structure
 ```bash
 ├── backend              # Go backend
 │   ├── cmd/main.go      # Entry point

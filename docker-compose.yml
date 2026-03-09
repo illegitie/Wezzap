@@ -5,7 +5,7 @@ services:
     container_name: weather_backend
     ports:
       - "8000:8000"
-    restart: always
+    restart: no
 
   frontend:
     build: ./frontend
@@ -14,4 +14,4 @@ services:
       - "8080:80"
     volumes:
       - ./frontend/public:/usr/share/nginx/html:ro
-    restart: always
+    restart: no
