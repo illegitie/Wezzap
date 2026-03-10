@@ -155,7 +155,7 @@ header h1{
 
 .hourly-scroll{
     display: flex;
-    overflow-x: visible;
+    overflow-x: scroll;
     flex-direction: row;
     gap: 15px;
     padding: 10px 0;
