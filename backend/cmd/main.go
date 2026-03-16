@@ -12,7 +12,7 @@ import (
 	"wezap/internal/client"
 	"wezap/internal/handler"
 	backend "wezap/internal/server"
-	"wezap/internal/services"
+	service "wezap/internal/services"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
